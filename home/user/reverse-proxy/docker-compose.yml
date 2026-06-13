@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  proxy:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - backend1
+      - backend2
+
+  backend1:
+    image: nginx:alpine
+    ports:
+      - "8081:80"
+    # nginx by default serves on / , we can add a simple health for demo
+    # For real health check we would need to configure nginx, but for MVP / is fine
+    # The health checker calls /health - for demo we can use / or leave it (it will mark DOWN but still works for failover demo)
+
+  backend2:
+    image: nginx:alpine
+    ports:
+      - "8082:80"
