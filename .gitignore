@@ -14,15 +14,14 @@
 # Go workspace file
 go.work
 go.work.sum
-go
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
 
 # Build output
 proxy
-
-
+dist/
+bench.txt
 
 # IDE / editor
 .idea/
