@@ -1,0 +1,54 @@
+listen: ":8080"
+
+backends:
+  - url: http://backend1:80
+    weight: 1
+  - url: http://backend2:80
+    weight: 1
+
+load_balancing:
+  strategy: round_robin
+
+health_check:
+  interval: 5s
+  timeout: 2s
+  path: /health
+  healthy_threshold: 2
+  unhealthy_threshold: 3
+
+rate_limit:
+  requests_per_minute: 100
+  burst: 50
+  trusted_proxies: []
+
+timeouts:
+  backend_dial: 3s
+  backend_response_header: 10s
+  backend_idle_conn: 90s
+  backend_tls_handshake: 5s
+  backend_max_idle_conns: 256
+  backend_max_idle_conns_per_host: 64
+  server_read: 15s
+  server_read_header: 5s
+  server_write: 30s
+  server_idle: 60s
+  shutdown: 10s
+
+retry:
+  max_attempts: 2
+
+circuit_breaker:
+  failure_threshold: 5
+  open_timeout: 30s
+  half_open_probes: 1
+
+tls:
+  cert_file: ""
+  key_file: ""
+
+log:
+  level: info
+  format: json
+
+redis:
+  addr: ""
